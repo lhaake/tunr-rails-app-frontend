@@ -12,8 +12,9 @@ library.add(faHeart, faEdit, faTimes)
 
 function App() {
   // url to backend
- const url = "https://lhaake-tunr-backend.herokuapp.com/songs"
+ const url = "https://lhaake-tunr-backend.herokuapp.com/songs/"
   // http://localhost:3000/songs/
+
  	// empty song for create
 	const emptySong = {
 		title: "",
