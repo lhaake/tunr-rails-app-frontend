@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import Playlist from "./components/Playlist";
-import Form from "./components/Form";
-import Favorites from "./components/Favorites";
+import Playlist from "./components/Playlist/Playlist";
+import Form from "./components/Form/Form";
+import Favorites from "./components/Favorites/Favorites";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -11,9 +11,10 @@ import { faHeart, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons'
 library.add(faHeart, faEdit, faTimes)
 
 function App() {
-  // url to backend
- const url = "https://lhaake-tunr-backend.herokuapp.com/songs/"
-  // http://localhost:3000/songs/
+  	// url to backend
+	const url = "https://lhaake-tunr-backend.herokuapp.com/songs/"
+	 
+  	// http://localhost:3000/songs/
 
  	// empty song for create
 	const emptySong = {
@@ -21,12 +22,12 @@ function App() {
 		artist: "",
 		time: "",
 		favorite: false,
-  };
+  	};
   
 	// State
 	const [songs, setSongs] = useState([]);
 	const [selectedSong, setSelectedSong] = useState(emptySong);
-  const [favorites, setFavorites] = useState([]);
+  	const [favorites, setFavorites] = useState([]);
   
 
      // API call for songs
@@ -47,8 +48,6 @@ function App() {
  
       getSongs()
   }, [])
-
-  console.log("looking for the songs", songs)
 
   //Add to favorites
 	const handleFavoritesClick = (favesong) => {
@@ -84,18 +83,19 @@ function App() {
 		}).then((response) => getSongs());
   };
   
-  // delete
+  // delete a song
 	const removeSong = (song) => {
     fetch(url + song.id, {
 			method: 'delete',
 		}).then((response) => getSongs());
   };
 
-  // select song 
+  // select a song 
   const selectSong = (song) => {
     setSelectedSong(song)
   }
 
+  // remove a song from favorites 
   const removeFromFaves = song => {
     console.log("Remove from favorites button clicked!")
     const favesArray = favorites.filter((article, i) => i !== song)
@@ -104,53 +104,50 @@ function App() {
   }
 
   return (
-    <div className="App">
-      	<h1>TUNR.</h1>
+	<div className="App">
+		<div className="header">
+      	<h1 className="tunr-title">TUNR.</h1>
 			  <h6>FOR ALL YOUR PLAYLIST NEEDS</h6>
-			  <hr />
+		</div> 
   
-	    <Route exact
-					path="/"
-					render={(rp) => (
-        <Playlist
-          {...rp}
-				  songs={songs}
-          removeSong={removeSong}
-          selectSong={selectSong}
-			  	handleFavoritesClick={handleFavoritesClick}
-			  />
-      )}
-      />
+	    <Route exact path="/"
+			render={(rp) => (
+        	<Playlist
+         	 {...rp}
+			songs={songs}
+          	removeSong={removeSong}
+          	selectSong={selectSong}
+			handleFavoritesClick={handleFavoritesClick}
+			/>
+      		)}
+      	/>
 
-			<Favorites favorites={favorites} removeFromFaves={removeFromFaves} />
+		<Favorites favorites={favorites} removeFromFaves={removeFromFaves} />
 
 
-        <Route 
-          exact
-					path="/"
-					render={(rp) => (
-						<Form
-							{...rp}
-							label="create"
-							song={emptySong}
-							handleSubmit={handleCreate}
-						/>
-					)}
-				/>
+        <Route exact path="/"
+			render={(rp) => (
+			<Form
+				{...rp}
+				label="ADD NEW SONG"
+				song={emptySong}
+				handleSubmit={handleCreate}
+			/>
+			)}
+		/>
 
-        <Route exact
-					path="/edit"
-					render={(rp) => (
+        <Route exact path="/edit"
+			render={(rp) => (
            <Form
             {...rp}
-            label="update" 
+            label="UPDATE SONG" 
             song={selectedSong}
             handleSubmit={handleUpdate} 
             />
-        		)}
-				/>
+        	)}
+		/>
 
-    </div>
+   </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Playlist.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Playlist = (props) => {
@@ -8,28 +9,28 @@ const Playlist = (props) => {
     let showSongs = ""
     showSongs = songs.map((song) => {
         return (
-        <article>
+        <p className="playlist">
             <p>{song.title}</p>
             <p>{song.artist}</p>
             <p>{song.time}</p>
 
-            <p>
-              <FontAwesomeIcon icon="heart" size="lg" onClick={() => props.handleFavoritesClick(song)} />
-              <FontAwesomeIcon icon="edit" size="lg" onClick={() => {
+            <ul className="icons">
+              <li><FontAwesomeIcon icon="heart" size="lg" color="maroon" onClick={() => props.handleFavoritesClick(song)} /></li>
+              <li><FontAwesomeIcon icon="edit" size="lg" onClick={() => {
                 props.selectSong(song)        
                 props.history.push("/edit")
-              }} />
-              <FontAwesomeIcon icon="times" size="lg" onClick={() => {
+              }} /></li>
+              <li><FontAwesomeIcon icon="times" size="lg" onClick={() => {
                 props.removeSong(song)        
-              }} />
-            </p>
-        </article>
+              }} /></li>
+            </ul>
+        </p>
         )
     })
 
     return (
         <>
-        <h1>Playlist</h1>
+        <h1>PLAYLIST 1</h1>
         {showSongs}
         </>
     )

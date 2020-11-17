@@ -1,4 +1,6 @@
 import React from "react";
+import "./Favorites.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Favorites = (props) => {
 	console.log(props);
@@ -6,20 +8,19 @@ const Favorites = (props) => {
 
 	let showFavorites = faves.map((fave, index) => {
 		return (
-			<div className="fav-article">
+			<div className="fav-song">
 				<p>{fave.title}</p>
 				<p>{fave.artist}</p>
 				<p>{fave.time}</p>
-
-				<button onClick={() => props.removeFromFaves(index)}>
-					REMOVE TUNE
-				</button>
+				<FontAwesomeIcon icon="times" size="lg" onClick={() => {
+               props.removeFromFaves(index) }} /> 
+			
 			</div>
 		);
 	});
 	return (
 		<div>
-			<h1>FAVE TUNES.</h1>
+			<h1>Favorite Songs List</h1>
 			<div className="favorites">{showFavorites}</div>
 		</div>
 	);

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import "./Form.css";
 
 const Form = (props) => {
 
@@ -22,8 +23,9 @@ const Form = (props) => {
   return (
       <div className="song-form">
 
-        <form onSubmit={handleSubmit}>   
-        TITLE
+        <form onSubmit={handleSubmit}> 
+        <h1>ADD A NEW SONG</h1>  
+        <label>TITLE</label>
         <input
             type="text"
             name="title"
@@ -31,22 +33,22 @@ const Form = (props) => {
             onChange={handleChange}
         />
 
-        ARTIST
+        <label>ARTIST</label>
         <input
             type="text"
             name="artist"
             value={formData.artist}
             onChange={handleChange}
         />
-
-        TIME
+   
+         <label>TIME</label>
         <input
             type="text"
             name="time"
             value={formData.time}
             onChange={handleChange}
         />
-    
+       
         <input
             type="hidden"
             name="time"
@@ -54,7 +56,7 @@ const Form = (props) => {
             onChange={handleChange}
         />
 
-        <input type="submit" value={props.label} />
+        <input className="form-button" type="submit" value={props.label} />
 
         </form>
     </div>
