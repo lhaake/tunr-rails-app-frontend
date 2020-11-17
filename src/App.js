@@ -12,8 +12,8 @@ library.add(faHeart, faEdit, faTimes)
 
 function App() {
   // url to backend
- const url = "http://localhost:3000/songs/"
-
+ const url = "https://lhaake-tunr-backend.herokuapp.com/songs"
+  // http://localhost:3000/songs/
  	// empty song for create
 	const emptySong = {
 		title: "",
@@ -31,7 +31,7 @@ function App() {
      // API call for songs
       const getSongs = async () => {
         try {
-            const res = await fetch('http://localhost:3000/songs/')
+            const res = await fetch(url)
             const json = await res.json()
             setSongs(json)
    
