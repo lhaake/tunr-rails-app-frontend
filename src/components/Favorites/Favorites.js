@@ -19,10 +19,8 @@ const Favorites = (props) => {
 			: null }
 			</>
 		)
-		
 	})
 	
-
 	return (
 		<div className="title-favorites">
 			<h1>Favorite Songs List</h1>

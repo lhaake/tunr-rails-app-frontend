@@ -1,52 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
 
-/* .playlist {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-  padding: 0px 15px;
-  font-family: 'Rokkitt', serif;
-} */
-
-/* .playlist {
-    display: grid;
-    grid-template-rows: 2fr, 2fr, 1fr, 1fr;
-    grid-template-areas: 
-    "title title artist artist time icons"; 
-   font-family: 'Rokkitt', serif;
-   align-items: start;
-}
-.title {
-    grid-area: title;
-    padding-left: 10px;
-}
-.artist {
-    grid-area: artist;
-}
-.time {
-    grid-area: time;
-}
-.icons {
-    grid-area: icons;
-}
-
-
-
-
-h1 {
-    text-align: left;
-    padding-left: 10px;
-}
-
-.title-heading, .artist-heading, .time-heading, .icons-heading {
-    display: inline;
-    padding: 20px;
- 
-} */
-
-
-
 td {
   border-top: 0px solid white !important; 
 }
@@ -79,7 +32,6 @@ th {
 
 .filter-container table {
   font-family: 'Rokkitt', serif;
-  /* line-height: 1.6em; */
   font-weight: 400
 }
 .icons li {
@@ -89,11 +41,10 @@ th {
 }
 
 .icons {
-    padding: 0px !important;
-    margin-bottom: 5px;
+  padding: 0px !important;
+  margin-bottom: 5px;
 }
 
 .fav th {
-   padding-left: 20px !important;
-
+  padding-left: 20px !important;
 }
