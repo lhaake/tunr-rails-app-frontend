@@ -3,23 +3,28 @@ import "./Favorites.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Favorites = (props) => {
-	console.log(props);
-	const faves = props.favorites;
+	const songs = props.songs
 
-	let showFavorites = faves.map((fave, index) => {
+	let showFavorites = songs.map((fave, index) => {
 		return (
-			<div className="fav-song">
+			<>
+				{fave.favorite ? 
+				<div className="faves-container">
 				<p>{fave.title}</p>
 				<p>{fave.artist}</p>
 				<p>{fave.time}</p>
-				<FontAwesomeIcon icon="times" size="lg" onClick={() => {
-               props.removeFromFaves(index) }} /> 
-			
-			</div>
-		);
-	});
+				<p><FontAwesomeIcon icon="times" size="lg" onClick={() => {
+               props.removeFromFaves(fave, index) }} /> </p>
+			   </div>
+			: null }
+			</>
+		)
+		
+	})
+	
+
 	return (
-		<div>
+		<div className="title-favorites">
 			<h1>Favorite Songs List</h1>
 			<div className="favorites">{showFavorites}</div>
 		</div>

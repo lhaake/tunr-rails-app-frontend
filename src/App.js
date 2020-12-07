@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Playlist from "./components/Playlist/Playlist";
-import Form from "./components/Form/Form";
+import SongForm from "./components/SongForm/SongForm";
 import Favorites from "./components/Favorites/Favorites";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,8 +13,6 @@ library.add(faHeart, faEdit, faTimes)
 function App() {
   	// url to backend
 	const url = "https://lhaake-tunr-backend.herokuapp.com/songs/"
-	 
-  	// http://localhost:3000/songs/
 
  	// empty song for create
 	const emptySong = {
@@ -27,8 +25,6 @@ function App() {
 	// State
 	const [songs, setSongs] = useState([]);
 	const [selectedSong, setSelectedSong] = useState(emptySong);
-  	const [favorites, setFavorites] = useState([]);
-  
 
      // API call for songs
       const getSongs = async () => {
@@ -49,22 +45,19 @@ function App() {
       getSongs()
   }, [])
 
-  //Add to favorites
+  	//Add to favorites
 	const handleFavoritesClick = (favesong) => {
 		console.log("Add favorites button clicked!");
-		setFavorites([
-			...favorites,
-			{
-				title: favesong.title,
-				artist: favesong.artist,
-				time: favesong.time,
-				favorite: true,
-			},
-		]);
-  };
-  
+		 
+		for(let i = 0; i < songs.length; i += 1) {
+			if(songs[i]["id"] === favesong["id"]) {
+				songs[i]["favorite"] = true
+				setSongs([...songs])
+			}
+		}
+  	}
 
-  // handleCreate for creating songs
+  	// handleCreate for creating songs
 	const handleCreate = (newSong) => {
 		fetch(url, {
 			method: 'post',
@@ -73,8 +66,7 @@ function App() {
 		}).then((response) => getSongs());
   };
   
-
-	//  handleUpdate to edit songs
+	// handleUpdate to edit songs
 	const handleUpdate = (song) => {
     fetch(url + song.id, {
 			method: 'put',
@@ -83,7 +75,7 @@ function App() {
 		}).then((response) => getSongs());
   };
   
-  // delete a song
+  	// delete a song
 	const removeSong = (song) => {
     fetch(url + song.id, {
 			method: 'delete',
@@ -96,59 +88,84 @@ function App() {
   }
 
   // remove a song from favorites 
-  const removeFromFaves = song => {
+  const removeFromFaves = (song, key) => {
     console.log("Remove from favorites button clicked!")
-    const favesArray = favorites.filter((article, i) => i !== song)
-    setFavorites(favesArray)
-    console.log("this is removing favorites", favorites)
+	
+	for(let i = 0; i < songs.length; i += 1) {
+		if(songs[i]["id"] === song["id"]) {
+			songs[i]["favorite"] = false
+			setSongs([...songs])
+		}
+	}
   }
 
   return (
 	<div className="App">
 		<div className="header">
-      	<h1 className="tunr-title">TUNR.</h1>
-			  <h6>FOR ALL YOUR PLAYLIST NEEDS</h6>
+      		<h1 className="tunr-title">TUNR.</h1>
+			<h5>For All Your Playlist Needs</h5>
 		</div> 
-  
+		<Switch>
 	    <Route exact path="/"
 			render={(rp) => (
+			<>
         	<Playlist
-         	 {...rp}
-			songs={songs}
-          	removeSong={removeSong}
-          	selectSong={selectSong}
-			handleFavoritesClick={handleFavoritesClick}
+         		{...rp}
+				songs={songs}
+				removeSong={removeSong}
+				selectSong={selectSong}
+				removeFromFaves={removeFromFaves} 
+				handleFavoritesClick={handleFavoritesClick}
 			/>
-      		)}
-      	/>
-
-		<Favorites favorites={favorites} removeFromFaves={removeFromFaves} />
-
-
-        <Route exact path="/"
-			render={(rp) => (
-			<Form
+			<Favorites
+				removeFromFaves={removeFromFaves}
+				songs={songs} 
+			/> 
+			<SongForm
 				{...rp}
-				label="ADD NEW SONG"
+				label="Add a New Song"
 				song={emptySong}
 				handleSubmit={handleCreate}
 			/>
-			)}
-		/>
+			</>
+      		)}
+      	/>
 
-        <Route exact path="/edit"
+        <Route path="/edit"
 			render={(rp) => (
-           <Form
+           <SongForm
             {...rp}
-            label="UPDATE SONG" 
+            label="Edit Song" 
             song={selectedSong}
             handleSubmit={handleUpdate} 
             />
         	)}
 		/>
+		</Switch>
 
    </div>
   );
 }
 
 export default App;
+
+
+// http://localhost:3000/songs/
+
+// const [favorites, setFavorites] = useState([]);
+
+// filter() is evaluating if favoritesong index doesnt equal the index val passed in (that we want to remove), then add to the favesArray
+	// const favesArray = favorites.filter((favoritesong, i) => i !== key)
+	// setFavorites(favesArray)
+
+// In handleFavoritesClick
+		// setFavorites([
+		// 	...favorites,
+		// 	{
+		// 		id: favesong.id,
+		// 		title: favesong.title,
+		// 		artist: favesong.artist,
+		// 		time: favesong.time,
+		// 		favorite: true,
+		// 	},
+		// ]);	

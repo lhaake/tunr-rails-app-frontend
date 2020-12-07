@@ -1,11 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500&family=Rokkitt:wght@400&display=swap');
 
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -15,7 +15,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   font-family: 'Markazi Text', serif;
-}
+} */
 
 .tunr-title {
   font-size: 70px;
@@ -26,31 +26,16 @@
 }
 
 h1 {
-  font-family: 'Markazi Text', serif;
+  font-family: 'Viga', sans-serif;
 }
 
 .header {
-  border-bottom: 4px solid maroon;
+  border-bottom: 4px solid #32e0c4;
 }
-.header h6 {
-  text-align: right;
-  font-size: 14px;
-  padding-right: 10px;
+.header h5 {
+  font-size: 16px;
+  padding-left: 15px;
   margin-top: 0px;
-  color: navy;
-  
+  color: black;
   font-family: 'Rokkitt', serif;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

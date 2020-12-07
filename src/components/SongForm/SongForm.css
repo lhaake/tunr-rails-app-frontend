@@ -1,0 +1,42 @@
+
+/* input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+} */
+
+.song-form label {
+    font-family: 'Rokkitt', serif;
+    font-weight: bold;
+}
+
+.song-form h1{
+  padding: 20px;
+}
+
+.song-form button {
+    color: white;
+    background-color: #c62a88;
+    border: #c62a88;
+    font-weight: bold;
+    font-family: 'Rokkitt', serif;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.song-form button:hover {
+    color: white;
+    background-color: #0d7377;
+    border: #0d7377;
+    font-weight: bold;
+    font-family: 'Rokkitt', serif;
+    font-size: 20px;
+    margin-top: 30px;
+}
+.add-song-form {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 20px 20px 20px;
+  /* width: 40%; */
+}
